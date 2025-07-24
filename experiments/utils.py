@@ -10,11 +10,16 @@ def cosine_similarity(a, b):
 
 
 def download_nltk_data():
-    try:
-        nltk.data.find("tokenizers/punkt")
-    except LookupError:
-        nltk.download("punkt")
+    resources = {
+        "punkt_tab": "tokenizers/punkt",
+        "stopwords": "corpora/stopwords",
+    }
 
+    for name, path in resources.items():
+        try:
+            nltk.data.find(path)
+        except LookupError:
+            nltk.download(name)
 
 def get_embedding(text, model):
     text = text.replace("\n", " ")
