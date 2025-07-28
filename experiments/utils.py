@@ -21,6 +21,7 @@ def download_nltk_data():
         except LookupError:
             nltk.download(name)
 
+
 def get_embedding(text, model):
     text = text.replace("\n", " ")
     return client.embeddings.create(input=[text], model=model).data[0].embedding
