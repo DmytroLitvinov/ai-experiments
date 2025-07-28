@@ -1,6 +1,6 @@
 from experiments.system_prompts import useful_assistant_prompt
-from experiments.constants import model
-from experiments.openai_client import client
+from experiments.constants import MODEL_ENGINE
+from openai_client import client
 import click
 
 history = [
@@ -27,7 +27,7 @@ while True:
     )
 
     response = client.chat.completions.create(
-        model=model,
+        model=MODEL_ENGINE,
         messages=history,
     )
 

@@ -1,8 +1,8 @@
 import click
 import json
 
-from experiments.constants import embedding_model, model
-from experiments.openai_client import client
+from experiments.constants import EMBEDDING_MODEL, MODEL_ENGINE
+from openai_client import client
 from experiments.system_prompts import useful_assistant_prompt
 from experiments.utils import (
     preprocess_text,
@@ -45,8 +45,8 @@ def sort_history(history, prompt, context_window):
         preprocessed_content = preprocess_text(content)
         preprocessed_prompt = preprocess_text(prompt)
 
-        embedding_content = get_embedding(preprocessed_content, embedding_model)
-        embedding_prompt = get_embedding(preprocessed_prompt, embedding_model)
+        embedding_content = get_embedding(preprocessed_content, EMBEDDING_MODEL)
+        embedding_prompt = get_embedding(preprocessed_prompt, EMBEDDING_MODEL)
 
         similarity = cosine_similarity(embedding_content, embedding_prompt)
 
@@ -77,7 +77,7 @@ while True:
     messages = global_context + sorted_history
 
     response = client.chat.completions.create(
-        model=model,
+        model=MODEL_ENGINE,
         messages=messages,
         max_tokens=200,
         temperature=1,

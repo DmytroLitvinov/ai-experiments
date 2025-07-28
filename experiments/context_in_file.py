@@ -2,8 +2,8 @@ import json
 import click
 
 from experiments.system_prompts import useful_assistant_prompt
-from experiments.constants import model
-from experiments.openai_client import client
+from experiments.constants import MODEL_ENGINE
+from openai_client import client
 
 n = 2
 
@@ -48,7 +48,7 @@ while True:
     messages = global_context + full_history
 
     response = client.chat.completions.create(
-        model=model,
+        model=MODEL_ENGINE,
         messages=messages,
         max_tokens=150,
         temperature=0.7,

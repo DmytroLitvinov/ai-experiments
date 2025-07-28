@@ -1,3 +1,3 @@
-model = "gpt-4.1-nano-2025-04-14"
+MODEL_ENGINE = "gpt-4.1-nano-2025-04-14"
 
-embedding_model = "text-embedding-3-small"
+EMBEDDING_MODEL = "text-embedding-3-small"

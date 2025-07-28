@@ -1,4 +1,4 @@
-from experiments.openai_client import client
+from openai_client import client
 import numpy as np
 import nltk
 
