@@ -20,9 +20,7 @@ def print_messages(messages):
     messages = [message for message in messages if message["role"] != "system"]
     for message in messages:
         role = "Bot" if message["role"] == "assistant" else "You"
-        click.echo(
-            click.style(f"{role}: ", fg="blue") + message["role"]
-        )
+        click.echo(click.style(f"{role}: ", fg="blue") + message["role"])
     return messages
 
 

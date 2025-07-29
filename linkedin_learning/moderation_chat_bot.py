@@ -26,7 +26,6 @@ def generate_chat_completion(user_input, messages):
     return completion.choices[0].message.content
 
 
-
 st.title("🤖 Chatbot App")
 chat_placeholder = st.empty()
 
