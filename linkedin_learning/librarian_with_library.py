@@ -17,7 +17,8 @@ from langchain.docstore.document import Document
 load_dotenv()
 
 loader = CSVLoader(
-    file_path="./linkedin_learning/docs/dataset_small.csv", source_column="title")
+    file_path="./linkedin_learning/docs/dataset_small.csv", source_column="title"
+)
 
 data = loader.load()
 
@@ -34,16 +35,18 @@ retriever = qdrant.as_retriever()
 
 qa_chain = RetrievalQA.from_chain_type(
     llm=ChatOpenAI(temperature=0),
-    chain_type='stuff',
+    chain_type="stuff",
     retriever=retriever,
-    return_source_documents=True
+    return_source_documents=True,
 )
 
 while True:
     user_input = input("Hi im an AI librarian what can I help you with?\n")
 
-    book_request = "You are a librarian. Help the user answer their question. Do not provide the ISBN." +\
-        f"\nUser:{user_input}"
+    book_request = (
+        "You are a librarian. Help the user answer their question. Do not provide the ISBN."
+        + f"\nUser:{user_input}"
+    )
     result = qa_chain.invoke({"query": book_request})
-    print(len(result['source_documents']))
+    print(len(result["source_documents"]))
     print(result["result"])

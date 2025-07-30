@@ -18,15 +18,18 @@ def generate_book_recommendations(book_requests):
     # create templates
     system_template_book_agent = """You are book recommendation agent. Provide a short recommendation based on the user request."""
     system_message_prompt = SystemMessagePromptTemplate.from_template(
-        system_template_book_agent)
+        system_template_book_agent
+    )
 
     human_template_book_agent = "{text}"
     human_message_prompt = HumanMessagePromptTemplate.from_template(
-        human_template_book_agent)
+        human_template_book_agent
+    )
 
     # create full prompt
     chat_prompt = ChatPromptTemplate.from_messages(
-        [system_message_prompt, human_message_prompt])
+        [system_message_prompt, human_message_prompt]
+    )
 
     chain = chat_prompt | ChatOpenAI(temperature=1)
 
@@ -38,19 +41,19 @@ def generate_book_recommendations(book_requests):
 
 
 def generate_book_requests(n=5) -> list[str]:
-    """ Generate book requests
+    """Generate book requests
     n: number of requests
     """
     # create templates
     system_template_book_agent = """Generate one utterance for how someone may ask for a {text}. Include a genre and a year. """
     system_message_prompt = SystemMessagePromptTemplate.from_template(
-        system_template_book_agent)
+        system_template_book_agent
+    )
 
     # create full prompt
-    chat_prompt = ChatPromptTemplate.from_messages(
-        [system_message_prompt])
+    chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt])
 
-    chain = chat_prompt | ChatOpenAI(model='gpt-4')
+    chain = chat_prompt | ChatOpenAI(model="gpt-4")
 
     results = []
 
@@ -81,7 +84,8 @@ for i in range(0, len(recommendations)):
     a = recommendations[i]
     question_answers.append({"question": q, "answer": a})
     response = llm.predict(
-        f"Generate the response to the question: {q}. Only print the answer.")
+        f"Generate the response to the question: {q}. Only print the answer."
+    )
     predictions.append({"result": {response}})
 
 print("\nGenerating Self eval:")
@@ -90,9 +94,11 @@ print("\nGenerating Self eval:")
 eval_chain = QAEvalChain.from_llm(llm)
 
 # compare the results of two prompts against themselves
-graded_outputs = eval_chain.evaluate(question_answers,
-                                     predictions,
-                                     question_key="question",
-                                     prediction_key="result",
-                                     answer_key='answer')
+graded_outputs = eval_chain.evaluate(
+    question_answers,
+    predictions,
+    question_key="question",
+    prediction_key="result",
+    answer_key="answer",
+)
 print(graded_outputs)

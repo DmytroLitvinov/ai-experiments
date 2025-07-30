@@ -8,6 +8,7 @@ from experiments.constants import MODEL_ENGINE
 
 load_dotenv()
 
+
 class Person(BaseModel):
     first_name: str = Field(description="first name")
     last_name: str = Field(description="last name")
@@ -20,15 +21,15 @@ class PeopleList(BaseModel):
 
 model = ChatOpenAI(model=MODEL_ENGINE)
 people_data = model.invoke(
-    "Generate a list of 10 fake peoples information. Only return the list. Each person should have a first name, last name and date of birth.")
+    "Generate a list of 10 fake peoples information. Only return the list. Each person should have a first name, last name and date of birth."
+)
 
 parser = PydanticOutputParser(pydantic_object=PeopleList)
 
 prompt = PromptTemplate(
     template="Answer the user query.\n{format_instructions}\n{query}\n",
     input_variables=["query"],
-    partial_variables={
-        "format_instructions": parser.get_format_instructions()},
+    partial_variables={"format_instructions": parser.get_format_instructions()},
 )
 
 _input = prompt.format_prompt(query=people_data)
