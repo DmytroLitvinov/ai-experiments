@@ -5,7 +5,9 @@ from llama_index.embeddings.openai import OpenAIEmbedding, OpenAIEmbeddingModelT
 load_dotenv()
 
 # # changing the global default
-Settings.embed_model = OpenAIEmbedding(model=OpenAIEmbeddingModelType.TEXT_EMBED_3_SMALL)
+Settings.embed_model = OpenAIEmbedding(
+    model=OpenAIEmbeddingModelType.TEXT_EMBED_3_SMALL
+)
 
 documents = [
     Document(text="Abraham Lincoln was the 16th president of the United States."),

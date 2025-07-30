@@ -14,6 +14,7 @@ prompt_template = ChatPromptTemplate.from_messages(
     [("system", system_template), ("user", "{text}")]
 )
 
+
 def main():
     prompt = prompt_template.invoke({"language": "French", "text": "hi!"})
     print(prompt)

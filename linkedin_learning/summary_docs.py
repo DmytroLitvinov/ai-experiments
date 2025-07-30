@@ -12,11 +12,7 @@ application_prompt = """You are a professional technical writer. Summarize the f
     DOCUMENT:
 """
 
-llm = OpenAILike(
-    is_chat_model=True,
-    temperature=0.7,
-    model=MODEL_ENGINE
-)
+llm = OpenAILike(is_chat_model=True, temperature=0.7, model=MODEL_ENGINE)
 
 documents = SimpleDirectoryReader("./linkedin_learning/handbook").load_data()
 

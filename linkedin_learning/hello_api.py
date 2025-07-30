@@ -1,8 +1,8 @@
-from openai import OpenAI # version 1.0+
+from openai import OpenAI  # version 1.0+
 
 llm = OpenAI(
     api_key="dummy_for_lm_strudio_to_work",
-    base_url="http://localhost:1234/v1"  # using LM Studio for local development
+    base_url="http://localhost:1234/v1",  # using LM Studio for local development
 )
 
 system_prompt = """Given the following short description
@@ -20,8 +20,8 @@ response = llm.chat.completions.create(
     temperature=0.7,
     messages=[
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_input}
-    ]
+        {"role": "user", "content": user_input},
+    ],
 )
 
 print(response.choices[0].message.content)

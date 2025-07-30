@@ -8,6 +8,7 @@ load_dotenv()
 
 model = init_chat_model(MODEL_ENGINE, model_provider="openai")
 
+
 def main():
     messages = [
         SystemMessage("Translate the following from English into Italian"),
